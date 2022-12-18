@@ -9,22 +9,23 @@ type ChessBoardActions interface {
 }
 
 /*
-  - - - - Y - - - -
-  - * * * * * * * *   |
-  - * * * * * * * *   |
-  - * * * * * * * *   |
-  - * * * * * * * *   |
-  - * * * * * * * *   |
-    楚河 汉界          X
-  - * * * * * * * *   |
-  - * * * * * * * *   |
-  - * * * * * * * *   |
-  - * * * * * * * *   |
-  - * * * * * * * *   |
+---------Y---------------
+  - 0 1 2 3 4 5 6 7 8   |
+  - C H E G G G E H C   9
+  - * * * * * * * * *   8
+  - * C * * * * * C *   7
+  - S * S * S * S * S   6
+  - * * * * * * * * *   5
+    --- 楚河 汉界 ---    X
+  - * * * * * * * * *   4
+  - S * S * S * S * S   3
+  - * C * * * * * C *   2
+  - * * * * * * * * *   1
+  - C H E G G G E H C   0
 */
 type ChessBoard [BOARD_X][BOARD_Y]*ChessPiece
 
-func (chessBoard ChessBoard) performMove(move Move) {
+func (chessBoard *ChessBoard) performMove(move Move) {
 	if chessBoard.validateMove(move) {
 		chessBoard[move.to.x][move.to.y] = chessBoard[move.from.x][move.from.y]
 		chessBoard[move.from.x][move.from.y] = nil

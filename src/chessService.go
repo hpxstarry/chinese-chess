@@ -21,7 +21,6 @@ type StringService interface {
 type stringService struct{}
 
 func (stringService) Uppercase(s string) (string, error) {
-	fmt.Println("Uppercase s = %s", s)
 	if s == "" {
 		return "", ErrEmpty
 	}
@@ -71,7 +70,7 @@ func makeCountEndpoint(svc StringService) endpoint.Endpoint {
 	}
 }
 
-func main() {
+func main2() {
 	svc := stringService{}
 
 	uppercaseHandler := httptransport.NewServer(
@@ -96,7 +95,6 @@ func decodeUppercaseRequest(_ context.Context, r *http.Request) (interface{}, er
 	fmt.Println("decodeUppercaseRequest r = ", r)
 	fmt.Println("decodeUppercaseRequest r.Body = ", r.Body)
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		fmt.Println("decodeUppercaseRequest err %s", err)
 		return nil, err
 	}
 	fmt.Println("decodeUppercaseRequest")
